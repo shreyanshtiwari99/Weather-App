@@ -1,93 +1,141 @@
-window.addEventListener("load", () => {
-  let long;
+//GETTING ELEMENTS FROM HTML
+let temperatureDescription = document.querySelector(".temperature-description");
+let temperatureDegree = document.querySelector(".temperature-degree");
+let locationTimezone = document.querySelector(".location-timezone");
+let temperatureSection = document.querySelector(".temperature");
+const temperatureSpan = document.querySelector(".temperature span");
+let cityName = document.querySelector(".city-name");
+let iconimg = document.querySelector(".icon")
+const refreshTime = document.querySelector(".refreshed")
+const invalue = document.querySelector('#in')
+const form = document.querySelector(".searching");
+const btn = document.querySelector(".submission");
 
-  let lat;
-  let temperatureDescription = document.querySelector(
-    ".temperature-description"
-  );
-  let temperatureDegree = document.querySelector(".temperature-degree");
-  let locationTimezone = document.querySelector(".location-timezone");
-  let temperatureSection = document.querySelector(".temperature");
-  const temperatureSpan = document.querySelector(".temperature span");
+btn.addEventListener("click", getData)
 
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(position => {
-      long = position.coords.longitude;
-      lat = position.coords.latitude;
-      console.log(lat);
-      console.log(long);
+//
+window.addEventListener("load",()=>{
+  refreshTime.innerHTML= `<h4>Please enter a valid city name</h4>`;
+  invalue.innerHTML= ``;
+  temperatureDegree.innerHTML=``;
+})
 
-      const proxy = "https://cors-anywhere.herokuapp.com/";
-      const locationapi = `${proxy}http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=%20%09Ffx7XA6Jw14Zr7ykqaMGZznpAmhGo8pW%20&q=${lat}%2C${long}&language=en-us `;
-      fetch(locationapi)
-        .then(resp => {
-          return resp.json();
-        })
-        .then(papa => {
-          const locationKey = papa.Key;
-          const tz = papa.SupplementalAdminAreas[0].LocalizedName;
-          const weatherApi = `http://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=%20%09Ffx7XA6Jw14Zr7ykqaMGZznpAmhGo8pW%20`;
-          fetch(weatherApi)
-            .then(response => {
-              return response.json();
-            })
-            .then(data => {
-              console.log(data);
-              const value = data[0].Temperature.Metric.Value;
-              const desc = data[0].WeatherText;
-              const icon = data[0].WeatherIcon;
-              const time = data[0].LocalObservationDateTime;
-              //Set DOM elements from API
-              let celsius = value;
-              let kelvin = value + 273;
-              temperatureDegree.textContent = celsius;
-              temperatureDescription.textContent = desc.toUpperCase();
-              locationTimezone.textContent = tz;
-
-              //set icon
-              setIcons(icon, document.querySelector(".icon"));
-
-              temperatureSection.addEventListener("click", () => {
-                if (temperatureSpan.textContent === "C") {
-                  temperatureSpan.textContent = "K";
-                  temperatureDegree.textContent = kelvin;
-                } else {
-                  temperatureSpan.textContent = "C";
-                  temperatureDegree.textContent = celsius;
-                }
-              });
-            });
-        });
-    });
-  } else {
-    h1.textContent = "This will not work without location access!";
-  }
-
-  function setIcons(icon, iconID) {
-    const skycons = new Skycons({ color: "white" });
-    function iconChange(num) {
-      let assign;
-      if (num == 1 || num == 2 || num == 3 || num == 4 || num == 5) {
-        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-        document.body.style.background = " linear-gradient( #36D1DC,#5B86E5) ";
-
-        assign = "CLEAR_DAY";
-      } else if (num == 6 || num == 7 || num == 8 || num == 11) {
-        document.body.style.background = " linear-gradient( #bdc3c7,#2c3e50) ";
-        assign = "PARTLY_CLOUDY_DAY";
-      } else {
-        document.body.style.background =
-          " linear-gradient( #667db6,#0082c8,#0082c8,#667db6 ) ";
-        assign = "RAIN";
+function getData(){
+  let searchCIty = document.querySelector(".search").value;
+      if(!searchCIty || searchCIty==""){
+        refreshTime.innerHTML= `<h4>Please enter a valid city name</h4>`;
+       
       }
-      return assign;
-    }
+ // const proxy = "https://cors-anywhere.herokuapp.com/";
 
-    const currentIcon = iconChange(icon.toString());
+      // const locationKey = "http://api.openweathermap.org/data/2.5/weather?q=Raipur&appid=f8f1dac8b861a54ccc2b50d4306de857&units=metric ";
+      const first = `http://dataservice.accuweather.com/locations/v1/cities/search?apikey=Ffx7XA6Jw14Zr7ykqaMGZznpAmhGo8pW%20&q=${searchCIty}`
+      fetch(first)
+        .then(resp => {
+      
+            return resp.json();
+        })
+        .then(dataset => {
+          const locationKey = dataset[0].Key;
+        
+          const city = dataset[0].LocalizedName;
+          cityName.textContent = city.toUpperCase();
+            fetch(`http://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=%20%09Ffx7XA6Jw14Zr7ykqaMGZznpAmhGo8pW%20`)
+              .then(data => {
+                return data.json();
+              })
+              .then(result => {
+                console.log(result);
+                console.log(result[0].Temperature.Metric.Value);
+                console.log(result[0].WeatherText);
+                console.log(result[0].WeatherIcon);
+                console.log(result[0].IsDayTime)
+                // console.log(result[0].LocalObservationDateTime);
+                const value = Math.round(result[0].Temperature.Metric.Value);
+                const desc = result[0].WeatherText;
+                const icon = result[0].WeatherIcon;
+                const isDayTime = result[0].IsDayTime;
+               
+                // const time = result[0].LocalObservationDateTime[0].substr(11,16);
+
+                  //Set DOM elements from API
+                // temperatureDegree.textContent = value;
+                temperatureDescription.textContent = desc.toUpperCase();
+                refreshTime.innerHTML= `<h4>Data last obtained:${result[0].LocalObservationDateTime}</h4>`;
+                invalue.textContent= "in";
+                temperatureDegree.innerHTML= `${value}&deg;C`;
+                // locationTimezone.textContent = time;
+                // iconimg.src = `https://developer.accuweather.com/sites/default/files/${icon}-s.png`;
+
+                //set icon
+                setIcons(icon, document.querySelector(".icon"), isDayTime);
+              })
+              .catch(err =>{
+                console.log("There was some error in the second fetch:",err.message);
+              })
+               
+              
+        })
+        .catch(e =>{
+          
+          console.log("There was some error in first fetch",e.message);
+        })
+      };
+
+
+
+    
+  
+// FUNCTION TO ADD ANIMATED SVG ICONS
+  function setIcons(icon, iconID, isDayTime) {
+  
+    const currentIcon = iconChange(icon,isDayTime);
+    const skycons = new Skycons({ color: "white" });
+    
+
+
+    function iconChange(num, isDayTime) {
+      let assign;
+      if(isDayTime){
+            if (num == 1 || num ==2 || num==3 || num==4) {
+                assign = "CLEAR_DAY";
+            } 
+            else if (num == 6 || num == 7 || num == 8 || num == 5) {
+                assign = "PARTLY_CLOUDY_DAY";
+            }
+            else if (num == 12 ||num == 13 ||num == 14 ||num == 15 ||num == 16 ||num == 17 ||num == 18 ) {
+              assign = "RAIN";
+        }  else if (num == 11 ) {
+          assign = "FOG";
+      }else {
+            
+              assign = "SNOW";
+            }
+            return assign;
+          }
+  
+  else{
+    if (num == 33 || num ==34 || num==35) {
+      assign = "CLEAR_NIGHT";
+  } else if (num == 36 || num == 37 || num == 38 ) {
+    
+    assign = "PARTLY_CLOUDY_NIGHT";
+  } else if(num == 39 ||num == 40 ||num == 41 ||num == 42 ) {
+  
+    assign = "RAIN";
+  }
+  else{
+    assign = "SNOW";
+  }
+  return assign;
+}
+
+  }
+    
 
     console.log(currentIcon);
     skycons.play();
 
     return skycons.set(iconID, Skycons[currentIcon]);
   }
-});
+

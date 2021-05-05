@@ -1,7 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: 'Itim', cursive;
 }
 body {
   height: 100vh;
@@ -9,11 +14,129 @@ body {
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  background-image: url("./bg2.jpg");
 
-  font-family: sans-serif;
   color: white;
 }
-.location,
+.container{
+  background: rgba( 255, 255, 255, 0.25 );
+  box-shadow: 0 8px 32px 0 rgba(70, 70, 70, 0.37);
+  backdrop-filter: blur( 100px );
+  -webkit-backdrop-filter: blur( 100px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+
+
+  display: grid;
+  width: 25%;
+  grid-template-areas: "icon  "
+                        "desc  "
+                        "temp "
+                        ;
+  grid-template-rows: 30% 20% auto;
+  
+ 
+  
+  height: 70%;
+  
+  
+}
+.icon{
+  display: flex;
+  margin-top: 1em;
+  grid-area: icon;
+  margin-left: 33%;
+}
+.temperature-description{
+  display: flex;
+  grid-area: desc;
+  margin-top: 0.2em;
+  justify-content: center;
+  font-size: 2em;
+}
+.temperature{
+  display: flex;
+  align-self: center;
+  grid-area: temp;justify-content: center;
+  font-size: 3em;
+}
+.degree-logo{
+  grid: unit;
+  display: flex;
+}
+.city-name{
+  display: flex;
+  flex-direction: row;
+  grid-area: desc;
+  align-self: flex-end;
+  justify-content: center;
+}
+#in{
+  display: flex;
+  flex-direction: row;
+  grid-area: desc;
+  justify-content: center;
+  margin-top: 2.5em;
+  font-size: 1.2em;
+}
+.refreshed{
+  display: flex;
+  grid-area: temp;
+  flex-direction: row;
+  align-self: flex-end;
+  margin-bottom: 1em;
+  justify-content: center;
+}
+.search-bar{
+  margin-bottom: 1em;
+  width: 400px;
+  display: grid;
+  grid-template-columns: 80% auto;
+  grid-template-areas: "input btn";
+  border-radius: 10px;
+}
+.search{
+  background: rgba(255,255,255,0.4);
+  border: none;
+  width: 300px;
+  display: block;
+  outline: none;
+  transition: 0.5s;
+  height: 30p;
+  top: 250px;
+  margin: 0 auto;
+  padding: 10px;
+  color: #333;
+
+  
+}
+.search:focus{
+  background: rgba(255, 255, 255, 0.911);
+  color: black;
+}
+.submission{
+  background: rgba(255,255,255,0.4);
+  border: none;
+  transition: 0.5s;
+  display: block;
+  outline: none;
+  color: #333;
+  width: 65px;
+}
+.submission:hover{
+  background: rgba(255, 255, 255, 0.911);
+  cursor: pointer;
+}
+
+
+
+
+
+
+/* .location{
+  grid: ;
+} */
+/* .location,
 .temperature {
   height: 30vh;
   width: 50%;
@@ -36,3 +159,8 @@ body {
 .degree-section h2 {
   font-size: 40px;
 }
+.icon{
+  display: flex;
+  align-items: center ;
+  justify-content: center;
+} */
