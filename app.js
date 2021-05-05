@@ -29,7 +29,7 @@ function getData(){
  // const proxy = "https://cors-anywhere.herokuapp.com/";
 
       // const locationKey = "http://api.openweathermap.org/data/2.5/weather?q=Raipur&appid=f8f1dac8b861a54ccc2b50d4306de857&units=metric ";
-      const first = `http://dataservice.accuweather.com/locations/v1/cities/search?apikey=Ffx7XA6Jw14Zr7ykqaMGZznpAmhGo8pW%20&q=${searchCIty}`
+      const first = `https://dataservice.accuweather.com/locations/v1/cities/search?apikey=Ffx7XA6Jw14Zr7ykqaMGZznpAmhGo8pW%20&q=${searchCIty}`
       fetch(first)
         .then(resp => {
       
