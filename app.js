@@ -99,16 +99,20 @@ function getData(){
       if(isDayTime){
             if (num == 1 || num ==2 || num==3 || num==4) {
                 assign = "CLEAR_DAY";
+                document.body.style.backgroundImage = "url('clear.jpg')";
             } 
             else if (num == 6 || num == 7 || num == 8 || num == 5) {
                 assign = "PARTLY_CLOUDY_DAY";
+                document.body.style.backgroundImage = "url('rainy.jpg')";
             }
             else if (num == 12 ||num == 13 ||num == 14 ||num == 15 ||num == 16 ||num == 17 ||num == 18 ) {
               assign = "RAIN";
+              document.body.style.backgroundImage = "url('rain.jpg')";
         }  else if (num == 11 ) {
+          document.body.style.backgroundImage = "url('fog.jpg')";
           assign = "FOG";
       }else {
-            
+        document.body.style.backgroundImage = "url('snowDay.jpg')";
               assign = "SNOW";
             }
             return assign;
@@ -116,15 +120,17 @@ function getData(){
   
   else{
     if (num == 33 || num ==34 || num==35) {
+      document.body.style.backgroundImage = "url('night.jpg')";
       assign = "CLEAR_NIGHT";
   } else if (num == 36 || num == 37 || num == 38 ) {
-    
+    document.body.style.backgroundImage = "url('cloudyNight.jpg')";
     assign = "PARTLY_CLOUDY_NIGHT";
   } else if(num == 39 ||num == 40 ||num == 41 ||num == 42 ) {
-  
+    document.body.style.backgroundImage = "url('rain.jpg')";
     assign = "RAIN";
   }
   else{
+    document.body.style.backgroundImage = "url('snowNight.jpg')";
     assign = "SNOW";
   }
   return assign;
