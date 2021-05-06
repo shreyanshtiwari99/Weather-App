@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+
 @import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
 * {
   padding: 0;
@@ -14,8 +12,7 @@ body {
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  background-image: url("./bg2.jpg");
-
+  background-image: url("./bg3.jpg");
   color: white;
 }
 .container{
@@ -28,16 +25,17 @@ body {
 
 
   display: grid;
-  width: 25%;
+  
   grid-template-areas: "icon  "
                         "desc  "
                         "temp "
                         ;
   grid-template-rows: 30% 20% auto;
   
- 
+  width: 25%;
   
   height: 70%;
+   
   
   
 }
@@ -87,27 +85,20 @@ body {
   margin-bottom: 1em;
   justify-content: center;
 }
-.search-bar{
-  margin-bottom: 1em;
-  width: 400px;
-  display: grid;
-  grid-template-columns: 80% auto;
-  grid-template-areas: "input btn";
-  border-radius: 10px;
-}
+
 .search{
   background: rgba(255,255,255,0.4);
   border: none;
-  width: 300px;
+  width: 25%;
   display: block;
   outline: none;
   transition: 0.5s;
   height: 30p;
   top: 250px;
-  margin: 0 auto;
+  margin: 1em auto;
   padding: 10px;
   color: #333;
-
+  
   
 }
 .search:focus{
@@ -122,6 +113,8 @@ body {
   outline: none;
   color: #333;
   width: 65px;
+  height: 30px;
+  margin-bottom: 1em;
 }
 .submission:hover{
   background: rgba(255, 255, 255, 0.911);
@@ -130,37 +123,74 @@ body {
 
 
 
+@media  (max-width:360px) {
+  .container{
+    width: 100%;
+        
+  }
+  
+  .search{
+    background: rgba(255,255,255,0.4);
+   height: 50px;
+    width: 100%;
+  
+    
+    color: #333;
+  }
+  .submission{
+    background: rgba(255,255,255,0.4);
+    width: 60%;
+    height: 50px;
+   
+    
+    color: #333;}
+}
+
+@media  (max-width:768px ) and (min-width:360px) {
+  .container{
+    width: 100%;
+        
+  }
+ 
+  .search{
+    background: rgba(255,255,255,0.4);
+   height: 50px;
+    width: 100%;
+    grid-area: input;
+   
+    color: #333;;
+  }
+  .submission{
+    background: rgba(255,255,255,0.4);
+    grid-area: btn;
+    height: 50px;
+    margin: 10px 0 10px 0;
+    width: 60%;
+    color: #333;}
+}
+
+@media  (max-width:1200px ) and (min-width:768px) {
+  .container{
+    width: 50%;
+        
+  }
+ 
+  .search{
+    background: rgba(255,255,255,0.4);
+    height: 50px;
+     width: 50%;
+     grid-area: input;
+    
+     color: #333;;
+  }
+  .submission{
+    background: rgba(255,255,255,0.4);
+    grid-area: btn;
+    height: 50px;
+    margin: 10px 0 10px 0;
+    
+    color: #333;}
+}
 
 
 
-/* .location{
-  grid: ;
-} */
-/* .location,
-.temperature {
-  height: 30vh;
-  width: 50%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-.temperature {
-  flex-direction: column;
-}
-.degree-section {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-.degree-section span {
-  margin: 10px;
-  font-size: 30px;
-}
-.degree-section h2 {
-  font-size: 40px;
-}
-.icon{
-  display: flex;
-  align-items: center ;
-  justify-content: center;
-} */
