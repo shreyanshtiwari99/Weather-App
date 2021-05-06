@@ -139,7 +139,7 @@ body {
   }
   .submission{
     background: rgba(255,255,255,0.4);
-    width: 60%;
+    width: 20%;
     height: 50px;
    
     
@@ -165,7 +165,7 @@ body {
     grid-area: btn;
     height: 50px;
     margin: 10px 0 10px 0;
-    width: 60%;
+    width: 20%;
     color: #333;}
 }
 
