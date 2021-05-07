@@ -10,7 +10,7 @@ const refreshTime = document.querySelector(".refreshed")
 const invalue = document.querySelector('#in')
 const form = document.querySelector(".searching");
 const btn = document.querySelector(".submission");
-
+let d = new Date();
 btn.addEventListener("click", getData)
 
 window.addEventListener('keypress',(e)=>{
@@ -67,7 +67,8 @@ function getData(){
                   //Set DOM elements from API
                 // temperatureDegree.textContent = value;
                 temperatureDescription.textContent = desc.toUpperCase();
-                refreshTime.innerHTML= `<h4>Data last obtained:${result[0].LocalObservationDateTime}</h4>`;
+                // refreshTime.innerHTML= `<h4>Data last obtained:${result[0].LocalObservationDateTime}</h4>`;
+                refreshTime.innerHTML= `<h4>Last refreshed: ${d.getHours()}:${d.getMinutes()}</h4>`;
                 invalue.textContent= "in";
                 temperatureDegree.innerHTML= `${value}&deg;C`;
                 // locationTimezone.textContent = time;
