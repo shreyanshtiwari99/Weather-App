@@ -23,6 +23,7 @@ window.addEventListener("load",()=>{
 function getData(){
   let searchCIty = document.querySelector(".search").value;
       if(!searchCIty || searchCIty==""){
+        console.log("running")
         refreshTime.innerHTML= `<h4>Please enter a valid city name</h4>`;
        
       }
@@ -77,7 +78,7 @@ function getData(){
               
         })
         .catch(e =>{
-          
+          refreshTime.innerHTML= `<h4>Please enter a valid city name</h4>`;
           console.log("There was some error in first fetch",e.message);
         })
       };
