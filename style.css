@@ -121,9 +121,34 @@ body {
   cursor: pointer;
 }
 
+@media  (max-width:320px) {
+  body{
+    font-size: 12px ;
+    
+  }
+  .container{
+    width: 100%;
+        
+  }
+  
+  .search{
+    background: rgba(255,255,255,0.4);
+   height: 50px;
+    width: 100%;
+  
+    
+    color: #333;
+  }
+  .submission{
+    background: rgba(255,255,255,0.4);
+    width: 20%;
+    height: 50px;
+   
+    
+    color: #333;}
+}
 
-
-@media  (max-width:360px) {
+@media  (max-width:360px) and (min-width:320px){
   .container{
     width: 100%;
         
