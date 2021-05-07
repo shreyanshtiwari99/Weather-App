@@ -13,6 +13,11 @@ const btn = document.querySelector(".submission");
 
 btn.addEventListener("click", getData)
 
+window.addEventListener('keypress',(e)=>{
+  if(e.keyCode == 13){
+    btn.click();
+  }
+})
 //
 window.addEventListener("load",()=>{
   refreshTime.innerHTML= `<h4>Please enter a valid city name</h4>`;
