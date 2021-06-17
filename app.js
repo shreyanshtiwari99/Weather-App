@@ -10,6 +10,7 @@ const refreshTime = document.querySelector(".refreshed")
 const invalue = document.querySelector('#in')
 const form = document.querySelector(".searching");
 const btn = document.querySelector(".submission");
+const key = config.API_KEY;
 let d = new Date();
 btn.addEventListener("click", getData)
 
@@ -35,7 +36,7 @@ function getData(){
  // const proxy = "https://cors-anywhere.herokuapp.com/";
 
       // const locationKey = "http://api.openweathermap.org/data/2.5/weather?q=Raipur&appid=f8f1dac8b861a54ccc2b50d4306de857&units=metric ";
-      const first = `https://dataservice.accuweather.com/locations/v1/cities/search?apikey=Ffx7XA6Jw14Zr7ykqaMGZznpAmhGo8pW%20&q=${searchCIty}`
+      const first = `https://dataservice.accuweather.com/locations/v1/cities/search?apikey=${key}&q=${searchCIty}`
       fetch(first)
         .then(resp => {
       
@@ -46,7 +47,7 @@ function getData(){
         
           const city = dataset[0].LocalizedName;
           cityName.textContent = city.toUpperCase();
-            fetch(`http://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=%20%09Ffx7XA6Jw14Zr7ykqaMGZznpAmhGo8pW%20`)
+            fetch(`http://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=%20%09${key}`)
               .then(data => {
                 return data.json();
               })
@@ -85,6 +86,12 @@ function getData(){
         })
         .catch(e =>{
           refreshTime.innerHTML= `<h4>Please enter a valid city name</h4>`;
+          invalue.innerHTML= ``;
+          temperatureDegree.innerHTML=``;
+          const skycons = new Skycons({ color: "white" });
+          skycons.pause();
+          cityName.innerHTML  ='';
+          temperatureDescription.innerHTML = '';
           console.log("There was some error in first fetch",e.message);
         })
       };
